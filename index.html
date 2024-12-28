@@ -15,33 +15,18 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
         }
 
         header {
             background-color: #f4f4f4;
             padding: 1rem;
-            text-align: center;
-        }
-
-        nav {
-            background-color: #eeeeee;
-            padding: 0.5rem;
-            text-align: center;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #000;
+            width: 100%;
         }
 
         main {
@@ -52,6 +37,12 @@
             text-align: center;
             padding: 1rem;
             background-color: #f4f4f4;
+            width: 100%;
+        }
+
+        img {
+            max-width: 100px;
+            margin-bottom: 1rem;
         }
 
         /* Dark mode overrides */
@@ -64,21 +55,8 @@
             background-color: #1f1f1f;
         }
 
-        body[data-telegram-web-app-color-scheme="dark"] nav {
-            background-color: #333333;
-        }
-
         body[data-telegram-web-app-color-scheme="dark"] footer {
             background-color: #1f1f1f;
-        }
-
-        /* Links and buttons styling */
-        a {
-            color: #1e90ff;
-        }
-
-        a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -86,31 +64,9 @@
     <header>
         <h1>Welcome to TonCourses!</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#courses">Courses</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
     <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>Welcome to TonCourses, your number one source for online courses.</p>
-        </section>
-        <section id="courses">
-            <h2>Courses</h2>
-            <p>Explore our wide range of courses designed to help you succeed.</p>
-        </section>
-        <section id="about">
-            <h2>About</h2>
-            <p>Learn more about TonCourses and our mission to provide quality education.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Get in touch with us for any queries or support.</p>
-        </section>
+        <img src="https://ton.org/img/tonlogo.svg" alt="Ton Logo">
+        <p>Your number one source for online courses.</p>
     </main>
     <footer>
         <p>&copy; 2025 TonCourses. All rights reserved.</p>
@@ -121,10 +77,10 @@
         Telegram.WebApp.init();
 
         // Optional: Set the web app's title
-        Telegram.WebApp.setTitle("TonCourses!");
+        Telegram.WebApp.setTitle("TonCourses");
 
         // Optional: Set the color scheme based on user preference
-        Telegram.WebApp.setColorScheme("dark"); // Forces light mode, or remove if you want to follow system preference
+        Telegram.WebApp.setColorScheme("dark"); // Forces dark mode, or remove if you want to follow system preference
 
         // Optional: Hide the header (if desired)
         Telegram.WebApp.hideHeader();
