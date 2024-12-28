@@ -19,7 +19,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
         }
 
@@ -27,10 +27,13 @@
             background-color: #f4f4f4;
             padding: 1rem;
             width: 100%;
+            box-sizing: border-box;
         }
 
         main {
             padding: 2rem;
+            box-sizing: border-box;
+            width: 100%;
         }
 
         footer {
@@ -38,6 +41,7 @@
             padding: 1rem;
             background-color: #f4f4f4;
             width: 100%;
+            box-sizing: border-box;
         }
 
         img {
@@ -58,14 +62,25 @@
         body[data-telegram-web-app-color-scheme="dark"] footer {
             background-color: #1f1f1f;
         }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            main {
+                padding: 1rem;
+            }
+
+            img {
+                max-width: 80px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to TonCourses!</h1>
+        <h1>Welcome to TonCourses</h1>
     </header>
     <main>
-        <img src="https://ton.org/img/tonlogo.svg" alt="Ton Logo">
+        <img src="https://ton.org/download/ton_logo_light_background.svg" alt="Ton Logo">
         <p>Your number one source for online courses.</p>
     </main>
     <footer>
