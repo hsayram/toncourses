@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff"> <!-- For light mode -->
     <title>TonCourses</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* Default light mode styles */
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #eeeeee;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #f4f4f4;
+        }
+
+        /* Dark mode overrides */
+        body[data-telegram-web-app-color-scheme="dark"] {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        body[data-telegram-web-app-color-scheme="dark"] header {
+            background-color: #1f1f1f;
+        }
+
+        body[data-telegram-web-app-color-scheme="dark"] nav {
+            background-color: #333333;
+        }
+
+        body[data-telegram-web-app-color-scheme="dark"] footer {
+            background-color: #1f1f1f;
+        }
+
+        /* Links and buttons styling */
+        a {
+            color: #1e90ff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -40,5 +115,19 @@
     <footer>
         <p>&copy; 2025 TonCourses. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Initialize the Telegram Web App SDK
+        Telegram.WebApp.init();
+
+        // Optional: Set the web app's title
+        Telegram.WebApp.setTitle("TonCourses");
+
+        // Optional: Set the color scheme based on user preference
+        Telegram.WebApp.setColorScheme("light"); // Forces light mode, or remove if you want to follow system preference
+
+        // Optional: Hide the header (if desired)
+        Telegram.WebApp.hideHeader();
+    </script>
 </body>
 </html>
