@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff"> <!-- For light mode -->
     <title>TonCourses</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
     <style>
         /* Default light mode styles */
         body {
@@ -80,24 +79,60 @@
     </header>
     <main>
         <img src="https://ton.org/download/ton_logo_light_background.svg" alt="Ton Logo">
-        <p>Your number one source for online courses.</p>
+        <p>Your number one source for online courses!</p>
+        <h2 id="user-name">Loading...</h2> <!-- Здесь будет отображаться имя пользователя -->
     </main>
     <footer>
         <p>&copy; 2025 TonCourses. All rights reserved.</p>
     </footer>
 
     <script>
-        // Initialize the Telegram Web App SDK
-        Telegram.WebApp.init();
+        // Initialize the Telegram Web App SDK without init() method
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
 
-        // Optional: Set the web app's title
-        Telegram.WebApp.setTitle("TonCourses");
+        // Debug: Log initDataUnsafe to check the user object
+        console.log("initDataUnsafe:", Telegram.WebApp.initDataUnsafe);
 
-        // Optional: Set the color scheme based on user preference
-        Telegram.WebApp.setColorScheme("dark"); // Forces dark mode, or remove if you want to follow system preference
+        // Получаем данные о пользователе
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        console.log(user)
 
-        // Optional: Hide the header (if desired)
-        Telegram.WebApp.hideHeader();
+        // Добавляем небольшую задержку для того, чтобы гарантировать, что данные о пользователе загрузятся
+        setTimeout(() => {
+            // Проверяем, есть ли данные о пользователе и отображаем имя
+            if (user && user.first_name) {
+                document.getElementById("user-name").innerText = `Hello, ${user.first_name}!`;
+            } else {
+                document.getElementById("user-name").innerText = "User data not found.";
+            }
+
+            // Отправляем запрос
+            if (user && user.id) {
+                fetch('https://3583-151-236-21-144.ngrok-free.app/users/telegram-login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        username: user.username,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        language_code: user.language_code
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(`Fetch successful: ${JSON.stringify(data)}`);
+                })
+                .catch(error => {
+                    console.error(`Fetch error: ${error.message}`);
+                });
+            } else {
+                console.log("User data is missing");
+            }
+        }, 1000); // Задержка 1 секунда
     </script>
 </body>
 </html>
