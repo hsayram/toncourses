@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from datetime import datetime, timezone
 
+from fastapi.staticfiles import StaticFiles
 import jwt
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,10 +17,30 @@ from sqlalchemy.orm import sessionmaker
 DATABASE_URL = os.getenv("DATABASE_URL")
 SECRET_KEY = "your_secret_key"
 
+# Токен для аутентификации
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 # Инициализация базы данных с помощью SQLAlchemy
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+# Создание таблиц в базе данных
+Base.metadata.create_all(bind=engine)
+
+# Инициализация FastAPI
+app = FastAPI()
+
+# Инициализация CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.mount("/frontend", StaticFiles(directory=os.path.join(os.getcwd(), "frontend")), name="frontend")
 
 # Модель пользователя для базы данных
 class User(Base):
@@ -57,20 +78,6 @@ class TelegramUser(BaseModel):
     allows_write_to_pm: bool = False
     photo_url: str = None
 
-# Создание таблиц в базе данных
-Base.metadata.create_all(bind=engine)
-
-# Инициализация FastAPI
-app = FastAPI()
-
-# Инициализация CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Функция для получения сессии базы данных
 def get_db():
@@ -80,8 +87,6 @@ def get_db():
     finally:
         db.close()
 
-# Токен для аутентификации
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # Проверка токена (для защищенных эндпоинтов)
 def verify_token(token: str = Depends(oauth2_scheme)):

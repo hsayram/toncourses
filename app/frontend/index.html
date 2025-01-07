@@ -3,136 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff"> <!-- For light mode -->
-    <title>TonCourses</title>
+    <meta name="theme-color" content="#FFFFFF">
+    <title>Welcome to TonCourses</title>
+    <link rel="stylesheet" href="/frontend/css/styles.css">
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-    <style>
-        /* Default light mode styles */
-        body {
-            background-color: #ffffff;
-            color: #000000;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            text-align: center;
-        }
-
-        header {
-            background-color: #f4f4f4;
-            padding: 1rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        main {
-            flex: 1; /* Takes available space between header and footer */
-            padding: 2rem;
-            box-sizing: border-box;
-            width: 100%;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f4f4f4;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        img {
-            max-width: 100px;
-            margin-bottom: 1rem;
-        }
-
-        /* Dark mode overrides */
-        body[data-telegram-web-app-color-scheme="dark"] {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        body[data-telegram-web-app-color-scheme="dark"] header {
-            background-color: #1f1f1f;
-        }
-
-        body[data-telegram-web-app-color-scheme="dark"] footer {
-            background-color: #1f1f1f;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 600px) {
-            main {
-                padding: 1rem;
-            }
-
-            img {
-                max-width: 80px;
-            }
-        }
-    </style>
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Welcome to TonCourses</h1>
     </header>
-    <main>
-        <img src="https://ton.org/download/ton_logo_light_background.svg" alt="Ton Logo">
-        <p>Your number one source for online courses!</p>
-        <h2 id="user-name">Loading...</h2> <!-- Здесь будет отображаться имя пользователя -->
+    <main class="main-content">
+        <img src="https://ton.org/download/ton_logo_light_background.svg" alt="Ton Logo" class="logo">
+        <p>Your platform for online courses powered by Toncoin.</p>
+        <button class="primary-button" onclick="alert('Coming soon!')">
+            Learn More
+        </button>
     </main>
-    <footer>
+    <footer class="footer">
         <p>&copy; 2025 TonCourses. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Initialize the Telegram Web App SDK without init() method
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-
-        // Debug: Log initDataUnsafe to check the user object
-        console.log("initDataUnsafe:", Telegram.WebApp.initDataUnsafe);
-
-        // Получаем данные о пользователе
-        const user = Telegram.WebApp.initDataUnsafe.user;
-        console.log(user)
-
-        // Добавляем небольшую задержку для того, чтобы гарантировать, что данные о пользователе загрузятся
-        setTimeout(() => {
-            // Проверяем, есть ли данные о пользователе и отображаем имя
-            if (user && user.first_name) {
-                document.getElementById("user-name").innerText = `Hello, ${user.username}!`;
-            } else {
-                document.getElementById("user-name").innerText = "User data not found.";
-            }
-
-            // Send the user data to the backend
-            if (user && user.id) {
-                fetch('https://1a29-91-132-92-160.ngrok-free.app/users/telegram-login', {  // Replace localhost with actual URL if needed
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        user_id: user.id,
-                        username: user.username,
-                        first_name: user.first_name,
-                        last_name: user.last_name,
-                        language_code: user.language_code,
-                        is_premium: user.is_premium,
-                        added_to_attachment_menu: user.added_to_attachment_menu,
-                        allows_write_to_pm: user.allows_write_to_pm,
-                        photo_url: user.photo_url
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(`Fetch successful: ${JSON.stringify(data)}`);
-                })
-                .catch(error => {
-                    console.error(`Fetch error: ${error.message}`);
-                })
-            }
-        }, 1000); // Задержка 1 секунда
-    </script>
+    <script src="/frontend/js/app.js"></script>
 </body>
 </html>
