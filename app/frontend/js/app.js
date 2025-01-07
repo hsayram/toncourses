@@ -13,7 +13,7 @@ console.log(user);
 setTimeout(() => {
     // Проверяем, есть ли данные о пользователе и отображаем имя
     if (user && user.first_name) {
-        document.getElementById("user-name").innerText = `Hello, ${user.username}!`;
+        document.getElementById("user-name").innerText = `Hello, ${user.first_name}!`;
     } else {
         document.getElementById("user-name").innerText = "User data not found.";
     }
