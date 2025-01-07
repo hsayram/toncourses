@@ -102,24 +102,26 @@
         setTimeout(() => {
             // Проверяем, есть ли данные о пользователе и отображаем имя
             if (user && user.first_name) {
-                document.getElementById("user-name").innerText = `Helloooo, ${user.first_name}!`;
+                document.getElementById("user-name").innerText = `Hello, ${user.username}!`;
             } else {
                 document.getElementById("user-name").innerText = "User data not found.";
             }
 
-            // Отправляем запрос
+            // Send the user data to the backend
             if (user && user.id) {
-                fetch('https://648e-46-246-28-252.ngrok-free.app/users/telegram-login', {
+                fetch('https://1a29-91-132-92-160.ngrok-free.app/users/telegram-login', {  // Replace localhost with actual URL if needed
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         user_id: user.id,
                         username: user.username,
                         first_name: user.first_name,
                         last_name: user.last_name,
-                        language_code: user.language_code
+                        language_code: user.language_code,
+                        is_premium: user.is_premium,
+                        added_to_attachment_menu: user.added_to_attachment_menu,
+                        allows_write_to_pm: user.allows_write_to_pm,
+                        photo_url: user.photo_url
                     })
                 })
                 .then(response => response.json())
@@ -128,9 +130,7 @@
                 })
                 .catch(error => {
                     console.error(`Fetch error: ${error.message}`);
-                });
-            } else {
-                console.log("User data is missing");
+                })
             }
         }, 1000); // Задержка 1 секунда
     </script>
