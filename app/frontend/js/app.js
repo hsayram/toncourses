@@ -20,7 +20,7 @@ setTimeout(() => {
 
     // Send the user data to the backend
     if (user && user.id) {
-        fetch('https://4ae6-91-132-92-160.ngrok-free.app/users/telegram-login', {  // Replace localhost with actual URL if needed
+        fetch('https://2674-91-132-92-160.ngrok-free.app/users/telegram-login', {  // Replace localhost with actual URL if needed
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

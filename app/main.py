@@ -1,21 +1,27 @@
+import asyncio
+import logging
 import os
-from pathlib import Path
 from datetime import datetime, timezone
+from pathlib import Path
 
-from fastapi.staticfiles import StaticFiles
 import jwt
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import CommandStart
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.security import OAuth2PasswordBearer
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, create_engine
+from sqlalchemy import (Boolean, Column, DateTime, Integer, String,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # Подключение к базе данных PostgreSQL
 DATABASE_URL = os.getenv("DATABASE_URL")
 SECRET_KEY = "your_secret_key"
+BOT_TOKEN = os.getenv("BOT_API_TOKEN") 
 
 # Токен для аутентификации
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -28,8 +34,36 @@ Base = declarative_base()
 # Создание таблиц в базе данных
 Base.metadata.create_all(bind=engine)
 
+# Создаем экземпляры бота и диспетчера
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
+# Включим логирование
+logging.basicConfig(level=logging.INFO)
+
+# Функция обработки команды /start
+@dp.message(CommandStart())
+async def send_welcome(message: types.Message):
+    await message.answer(
+        "Hello, welcome to TonCourses! Here is your link to the app: https://t.me/toncourses_bot?startapp=1"
+    )
+
+
+# Асинхронная функция для запуска бота
+async def start_bot():
+    await dp.start_polling(bot)
+
+# Функция lifespan для FastAPI, чтобы запускать бота
+async def lifespan(app: FastAPI):
+    # Запуск бота в асинхронном режиме
+    asyncio.create_task(start_bot())  # Запускаем бота в фоновом режиме
+    yield
+    # Здесь можно добавить код для остановки бота, если это нужно
+    await bot.close()  # Закрываем соединение с Telegram API
+
+
 # Инициализация FastAPI
-app = FastAPI()
+# Add lifespan event handler
+app = FastAPI(lifespan=lifespan)
 
 # Инициализация CORS
 app.add_middleware(
