@@ -1,16 +1,34 @@
+import os
 from pathlib import Path
 from typing import List
 
 import jwt
+from databases import Database
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 
+DATABASE_URL = os.getenv("DATABASE_URL")
+SECRET_KEY = "your_secret_key"
+
+
+database = Database(DATABASE_URL)
 app = FastAPI()
 
-SECRET_KEY = "your_secret_key"
+# Обслуживание статических файлов
+# app.mount("/frontend", StaticFiles(directory="app/frontend"), name="frontend")
+
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
+
 
 # Токен
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -55,9 +73,10 @@ courses_db: List[Course] = [
     Course(id=2, title="FastAPI Guide", description="Master FastAPI for backend development.", price=39.99, is_active=True),
 ]
 
+
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    html_file = Path("index.html")  # Убедитесь, что путь правильный
+    html_file = Path("frontend/index.html")  # Убедитесь, что путь правильный
     if not html_file.exists():
         return {"error": "HTML file not found"}
     return HTMLResponse(content=html_file.read_text(), status_code=200)
