@@ -60,12 +60,12 @@ body {
 
 /* Block styles */
 .block-title {
-    text-align: left;
-    font-size: 0.9rem;
+    text-align: left;   
+    font-size: 0.75rem;
     font-weight: normal;
     color: #6D6D71;
-    margin-bottom: 10px;
-    margin-left: 5px; /* Добавляем небольшой отступ слева */
+    margin-bottom: 5px;
+    margin-left: 10px; /* Добавляем небольшой отступ слева */
 }
 
 .content-block {
@@ -73,7 +73,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);  /* Еще более мягкая тень */
     text-align: center;
     width: 100%; /* Растягиваем блоки на всю ширину */
     box-sizing: border-box; /* Для корректного расчета отступов */
@@ -81,6 +81,43 @@ body {
 
 .content-block p {
     color: #a7a7a7; /* Цвет текста внутри блоков */
-    font-size: 1rem; /* Увеличиваем шрифт */
+    font-size: 0.9rem; /* Увеличиваем шрифт */
 }
 
+.join-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Отступ между строками */
+}
+
+.join-text {
+    font-size: 0.85rem; /* Уменьшаем размер текста слева */
+    color: #000000; /* Темный цвет для текста */
+}
+
+
+/* Стили для кнопок */
+.join-button {
+    display: inline-block;
+    padding: 5px 15px;  /* Уменьшаем внутренние отступы для уменьшения высоты */
+    background-color: #0099FF; /* Яркий, но менее агрессивный синий */
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem; /* Размер шрифта */
+    line-height: 1.2;  /* Строка текста будет немного сжата по вертикали */
+    transition: background-color 0.3s ease;
+}
+
+.join-button:hover {
+    background-color: #007ACC; /* Немного темнее для ховера */
+}
+
+.separator {
+    border: 0; /* Убираем стандартное оформление */
+    border-top: 1px solid #D3D3D3; /* Тонкая линия серого цвета */
+    margin: 10px 0; /* Отступ сверху и снизу */
+    width: 100%; /* Ширина на всю ширину контейнера */
+}
