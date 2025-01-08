@@ -91,6 +91,8 @@ class User(Base):
     added_to_attachment_menu = Column(Boolean, default=False)
     allows_write_to_pm = Column(Boolean, default=True)
     photo_url = Column(String, nullable=True)
+    is_active = Column(Boolean, default=True)
+    last_login = Column(DateTime, default=datetime.now(timezone.utc))
     
     
 # Модели данных
@@ -152,38 +154,11 @@ async def telegram_login(user: TelegramUser, db: SessionLocal = Depends(get_db))
     print(db_user)
     print(user)
 
-    if db_user:
-        # Если пользователь существует, проверяем, изменились ли его параметры
-        user_updated = False
-
-        if db_user.username != user.username:
-            db_user.username = user.username
-            user_updated = True
-        if db_user.first_name != user.first_name:
-            db_user.first_name = user.first_name
-            user_updated = True
-        if db_user.last_name != user.last_name:
-            db_user.last_name = user.last_name
-            user_updated = True
-        if db_user.language_code != user.language_code:
-            db_user.language_code = user.language_code
-            user_updated = True
-        if db_user.is_premium != user.is_premium:
-            db_user.is_premium = user.is_premium
-            user_updated = True
-        if db_user.added_to_attachment_menu != user.added_to_attachment_menu:
-            db_user.added_to_attachment_menu = user.added_to_attachment_menu
-            user_updated = True
-        if db_user.allows_write_to_pm != user.allows_write_to_pm:
-            db_user.allows_write_to_pm = user.allows_write_to_pm
-            user_updated = True
-        if db_user.photo_url != user.photo_url:
-            db_user.photo_url = user.photo_url
-            user_updated = True
-
-        if user_updated:
-            db.commit()  # Коммитим изменения в БД
-            db.refresh(db_user)  # Обновляем объект пользователя в Python
+    if db_user:            
+        db_user.last_login = datetime.now(timezone.utc) # Обновляем время последнего входа
+        
+        db.commit()  # Коммитим изменения в БД
+        db.refresh(db_user)  # Обновляем объект пользователя в Python
 
         return {"message": "User data updated successfully", "token": jwt.encode({"user_id": user.user_id, "username": user.username}, SECRET_KEY, algorithm="HS256")}
     
@@ -200,6 +175,8 @@ async def telegram_login(user: TelegramUser, db: SessionLocal = Depends(get_db))
             added_to_attachment_menu=user.added_to_attachment_menu,
             allows_write_to_pm=user.allows_write_to_pm,
             photo_url=user.photo_url,
+            is_active=True,
+            last_login=datetime.now(timezone.utc)
         )
         db.add(db_user)
         db.commit()

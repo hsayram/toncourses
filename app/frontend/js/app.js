@@ -17,7 +17,7 @@ if (user) {
 
 // Send the user data to the backend
 if (user && user.id) {
-    fetch('https://2c87-151-236-26-61.ngrok-free.app/users/telegram-login', {
+    fetch('https://ffe9-151-236-26-61.ngrok-free.app/users/telegram-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
