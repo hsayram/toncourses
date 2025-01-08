@@ -1,82 +1,86 @@
 /* General styles */
 body {
-    background-color: #FFFFFF;
-    color: #333333;
-    font-family: Arial, sans-serif;
+    background-color: #EFEFF3;
+    color: #000000;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     min-height: 100vh;
-    text-align: center;
+}
+
+@media screen{
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 }
 
 /* Header */
 .header {
-    background-color: #0088CC;
-    color: #FFFFFF;
-    padding: 1.5rem;
+    background-color: #131314;  /* Изменили фон на #131314 */
+    color: #FFFFFF;  /* Цвет текста в хедере — белый */
     width: 100%;
     box-sizing: border-box;
-    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Добавим отступ между аватаром и юзернеймом */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;  /* Отступ справа от аватарки */
+}
+
+#user-username {
+    margin-right: 0;
+    font-size: 0.9rem;
+    color: #FFFFFF;  /* Цвет юзернейма — белый */
 }
 
 /* Main content */
 .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.primary-button {
-    background-color: #0088CC;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 1.5rem;
-    transition: background-color 0.3s ease;
-}
-
-.primary-button:hover {
-    background-color: #179CDE;
-}
-
-/* Powered by Ton section */
-.powered-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.powered-by {
-    font-size: 0.875rem;  /* Уменьшаем размер шрифта */
-    color: #8C8C8C;
-    font-style: italic;
-    margin-right: 1rem;
-}
-
-.logo {
-    max-width: 80px;
-}
-
-/* Footer */
-.footer {
-    background-color: #F4F4F4;
-    color: #8C8C8C;
-    padding: 1rem;
     width: 100%;
+    margin: 20px 0; /* Убираем отступы по бокам */
+    padding: 0 20px;
     box-sizing: border-box;
-    text-align: center;
 }
+
+/* Block styles */
+.block-title {
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #6D6D71;
+    margin-bottom: 10px;
+    margin-left: 5px; /* Добавляем небольшой отступ слева */
+}
+
+.content-block {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%; /* Растягиваем блоки на всю ширину */
+    box-sizing: border-box; /* Для корректного расчета отступов */
+}
+
+.content-block p {
+    color: #a7a7a7; /* Цвет текста внутри блоков */
+    font-size: 1rem; /* Увеличиваем шрифт */
+}
+

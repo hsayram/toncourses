@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FFFFFF">
-    <title>Welcome to TonCourses</title>
+    <meta name="theme-color" content="#EFEFF3">
+    <title>TonCourses</title>
     <link rel="stylesheet" href="/frontend/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 </head>
 <body>
     <header class="header">
-        <h1>Welcome to TonCourses</h1>
+        <div class="header-right">
+            <img id="user-avatar" class="user-avatar" alt="User Avatar">
+            <span id="user-username"></span>
+        </div>
     </header>
     <main class="main-content">
-        <p id="user-name"></p>
-        <p>Your gateway to education, powered by TON.</p>
-        <a href="https://t.me/toncourses/" target="_blank">
-            <button class="primary-button">Learn more</button>
-        </a>   
+        <!-- COURSES Block -->
+        <h2 class="block-title">COURSES</h2>
+        <div class="content-block">
+            <p>Courses will be available soon.</p>
+        </div>
+
+        <!-- SECOND BLOCK -->
+        <h2 class="block-title">TASKS</h2>
+        <div class="content-block">
+            <p>Tasks will be available soon.</p>
+        </div>
     </main>
-    <div class="powered-content">
-        <img class="logo" src="https://ton.org/download/ton_logo_light_background.svg" alt="Ton Logo">
-    </div>
-    <footer class="footer">
-        <p>&copy; 2025 TonCourses. All rights reserved.</p>
-    </footer>
     <script src="/frontend/js/app.js"></script>
 </body>
 </html>
