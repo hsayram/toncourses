@@ -1,4 +1,4 @@
-/* General styles */
+/* Общие стили */
 body {
     background-color: #EFEFF3;
     color: #000000;
@@ -7,21 +7,13 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     min-height: 100vh;
 }
 
-@media screen{
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-}
-
-/* Header */
+/* Хедер */
 .header {
-    background-color: #131314;  /* Изменили фон на #131314 */
-    color: #FFFFFF;  /* Цвет текста в хедере — белый */
+    background-color: #131314;
+    color: #FFFFFF;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -35,89 +27,103 @@ body {
     align-items: center;
 }
 
-/* Добавим отступ между аватаром и юзернеймом */
+/* Стили заголовка страницы */
+.page-title {
+    font-size: 1.5rem; /* Увеличенный размер шрифта */
+    color: #000000; /* Черный цвет текста */
+    text-align: left; /* Выравнивание по левому краю */
+    margin: 20px 0 10px 20px; /* Отступы: сверху, справа, снизу и слева */
+    font-weight: bold; /* Более жирный текст */
+}
+
+/* Блок контента */
+.content-block {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+
 .user-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 0.5rem;  /* Отступ справа от аватарки */
+    margin-right: 0.5rem;
 }
 
 #user-username {
-    margin-right: 0;
     font-size: 0.9rem;
-    color: #FFFFFF;  /* Цвет юзернейма — белый */
+    color: #FFFFFF;
 }
 
-/* Main content */
+/* Основной контент */
 .main-content {
+    flex: 1; /* Растягиваем основной контент */
     width: 100%;
-    margin: 20px 0; /* Убираем отступы по бокам */
+    margin: 20px 0;
     padding: 0 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Общие стили для футера */
+.footer-menu {
+    background-color: #ffffff;
+    border-top: 1px solid #eaeaea;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Высота футера */
+    display: flex;
+    justify-content: space-between; /* Располагаем элементы равномерно */
+    align-items: center;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05); /* Мягкая тень */
+    padding: 0 20px; /* Уменьшаем отступы с боков */
     box-sizing: border-box;
 }
 
-/* Block styles */
-.block-title {
-    text-align: left;   
-    font-size: 0.75rem;
-    font-weight: normal;
-    color: #6D6D71;
-    margin-bottom: 5px;
-    margin-left: 10px; /* Добавляем небольшой отступ слева */
-}
-
-.content-block {
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);  /* Еще более мягкая тень */
-    text-align: center;
-    width: 100%; /* Растягиваем блоки на всю ширину */
-    box-sizing: border-box; /* Для корректного расчета отступов */
-}
-
-.content-block p {
-    color: #a7a7a7; /* Цвет текста внутри блоков */
-    font-size: 0.9rem; /* Увеличиваем шрифт */
-}
-
-.join-row {
+/* Стили для элементов меню */
+.menu-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px; /* Отступ между строками */
-}
-
-.join-text {
-    font-size: 0.85rem; /* Уменьшаем размер текста слева */
-    color: #000000; /* Темный цвет для текста */
-}
-
-
-/* Стили для кнопок */
-.join-button {
-    display: inline-block;
-    padding: 5px 15px;  /* Уменьшаем внутренние отступы для уменьшения высоты */
-    background-color: #0099FF; /* Яркий, но менее агрессивный синий */
-    color: white;
+    flex-direction: column; /* Вертикальное расположение */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    justify-content: center; /* Центрируем элементы по вертикали */
     text-align: center;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 0.9rem; /* Размер шрифта */
-    line-height: 1.2;  /* Строка текста будет немного сжата по вертикали */
-    transition: background-color 0.3s ease;
+    color: #8C8C8C;  /* Серый цвет текста и иконок */
+    font-size: 0.75rem; /* Размер шрифта */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.join-button:hover {
-    background-color: #007ACC; /* Немного темнее для ховера */
+/* Убираем цвет ссылки */
+.menu-item a {
+    text-decoration: none;  /* Убираем подчеркивание */
+    color: inherit;  /* Наследуем цвет от родителя */
+    display: flex; /* Делаем ссылку flex-элементом */
+    flex-direction: column; /* Размещаем содержимое вертикально */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    justify-content: center; /* Центрируем содержимое по вертикали */
 }
 
-.separator {
-    border: 0; /* Убираем стандартное оформление */
-    border-top: 1px solid #D3D3D3; /* Тонкая линия серого цвета */
-    margin: 10px 0; /* Отступ сверху и снизу */
-    width: 100%; /* Ширина на всю ширину контейнера */
+/* Активный элемент */
+.menu-item.active {
+    color: #179CDE;  /* Синий цвет для активного элемента */
+}
+
+/* Иконки */
+.menu-item i {
+    font-size: 1.5rem;  /* Размер иконок */
+    margin-bottom: 5px;  /* Отступ между иконкой и текстом */
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении на иконки */
+.menu-item:hover i {
+    transform: scale(1.2);  /* Увеличение иконки при ховере */
 }

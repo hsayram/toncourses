@@ -138,7 +138,7 @@ def verify_token(token: str = Depends(oauth2_scheme)):
 # Основной маршрут для отображения HTML
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    html_file = Path("frontend/index.html")  # Путь к frontend файлу
+    html_file = Path("frontend/home.html")  # Путь к frontend файлу
     if not html_file.exists():
         return {"error": "HTML file not found"}
     return HTMLResponse(content=html_file.read_text(), status_code=200)

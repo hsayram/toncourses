@@ -6,18 +6,18 @@ window.Telegram.WebApp.expand(); // Expand the app to occupy more space
 const user = window.Telegram.WebApp.initDataUnsafe?.user;
 
 // Update UI with user data
-if (user) {
-    const username = user.username ? `@${user.username}` : '@Guest';
-    document.getElementById('user-username').textContent = username;
+// if (user) {
+//     const username = user.username ? `@${user.username}` : '@Guest';
+//     document.getElementById('user-username').textContent = username;
 
-    if (user.photo_url) {
-        document.getElementById('user-avatar').src = user.photo_url;
-    }
-}
+//     if (user.photo_url) {
+//         document.getElementById('user-avatar').src = user.photo_url;
+//     }
+// }
 
 // Send the user data to the backend
 if (user && user.id) {
-    fetch('https://ffe9-151-236-26-61.ngrok-free.app/users/telegram-login', {
+    fetch('https://b6eb-46-246-28-252.ngrok-free.app/users/telegram-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
